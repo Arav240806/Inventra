@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dash-body">
+
+<div class="dash-shell">
+  <div id="sidebarPlaceholder"></div>
+
+  <div class="dash-main">
+    <div id="topbarPlaceholder"></div>
+
+    <main class="dash-content">
+
+      <div class="page-toolbar">
+        <p class="page-sub">Every sale you've recorded — recording one automatically reduces stock.</p>
+      </div>
+
+      <div class="form-banner" id="pageBanner" hidden></div>
+
+      <nav class="subtabs" role="tablist">
+        <button class="subtab-btn active" id="tabBtnView" data-tab="view">View all</button>
+        <button class="subtab-btn" id="tabBtnAdd" data-tab="add">Add</button>
+        <button class="subtab-btn" id="tabBtnSearch" data-tab="search">Search</button>
+        <button class="subtab-btn" id="tabBtnDelete" data-tab="delete">Delete</button>
+      </nav>
+
+      <!-- View all -->
+      <section class="subtab-panel" data-panel="view">
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr><th>Product</th><th>Qty</th><th>Unit price</th><th>Total</th><th>Date</th><th></th></tr>
+            </thead>
+            <tbody id="salesBody">
+              <tr><td colspan="6">Loading sales...</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Add -->
+      <section class="subtab-panel" data-panel="add" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Record a sale</h3>
+
+          <div class="form-banner" id="formBanner" hidden></div>
+
+          <form id="saleForm" novalidate>
+            <div class="field">
+              <label for="productId">Product</label>
+              <select id="productId" name="productId" required>
+                <option value="" disabled selected>Select a product</option>
+              </select>
+              <span class="field-error" id="err-productId"></span>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="quantitySold">Quantity sold</label>
+                <input type="number" id="quantitySold" name="quantitySold" min="1" required>
+                <span class="field-error" id="err-quantitySold"></span>
+              </div>
+              <div class="field">
+                <label for="saleDate">Sale date</label>
+                <input type="date" id="saleDate" name="saleDate" required>
+                <span class="field-error" id="err-saleDate"></span>
+              </div>
+            </div>
+
+            <p class="empty-state" id="stockHint"></p>
+
+            <div class="modal-actions">
+              <button type="submit" class="btn btn-primary" id="formSubmit">Record sale</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <!-- Search -->
+      <section class="subtab-panel" data-panel="search" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Search sales</h3>
+          <div class="search-row">
+            <div class="field">
+              <input type="text" id="searchInput" placeholder="Search by product name">
+            </div>
+            <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+          </div>
+        </section>
+
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr><th>Product</th><th>Qty</th><th>Unit price</th><th>Total</th><th>Date</th></tr>
+            </thead>
+            <tbody id="searchBody">
+              <tr><td colspan="5">Search above to find a sale.</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Delete -->
+      <section class="subtab-panel" data-panel="delete" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Delete a sale record</h3>
+          <p class="empty-state">Deleting a sale removes the record only — it does not restore the stock that was deducted.</p>
+          <div class="search-row">
+            <div class="field">
+              <input type="text" id="deleteSearchInput" placeholder="Search by product name">
+            </div>
+            <button class="btn btn-primary" id="deleteSearchBtn" type="button">Search</button>
+          </div>
+        </section>
+
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr><th>Product</th><th>Qty</th><th>Total</th><th>Date</th><th></th></tr>
+            </thead>
+            <tbody id="deleteBody">
+              <tr><td colspan="5">Loading sales...</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/sales.js"></script>
+</body>
+</html>

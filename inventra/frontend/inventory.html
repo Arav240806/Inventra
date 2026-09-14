@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dash-body">
+
+<div class="dash-shell">
+  <div id="sidebarPlaceholder"></div>
+
+  <div class="dash-main">
+    <div id="topbarPlaceholder"></div>
+
+    <main class="dash-content">
+
+      <div class="page-toolbar">
+        <p class="page-sub">All products in your catalog.</p>
+      </div>
+
+      <div class="form-banner" id="pageBanner" hidden></div>
+
+      <nav class="subtabs" role="tablist">
+        <button class="subtab-btn active" id="tabBtnView" data-tab="view">View all</button>
+        <button class="subtab-btn" id="tabBtnAdd" data-tab="add">Add</button>
+        <button class="subtab-btn" id="tabBtnSearch" data-tab="search">Search</button>
+        <button class="subtab-btn" id="tabBtnDelete" data-tab="delete">Delete</button>
+      </nav>
+
+      <!-- View all -->
+      <section class="subtab-panel" data-panel="view">
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Supplier</th>
+                <th>Qty</th>
+                <th>Purchase ₹</th>
+                <th>Selling ₹</th>
+                <th>Expiry</th>
+                <th>Location</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="productsBody">
+              <tr><td colspan="10">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Add / Edit -->
+      <section class="subtab-panel" data-panel="add" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title" id="addPanelTitle">Add product</h3>
+
+          <div class="form-banner" id="formBanner" hidden></div>
+
+          <form id="productForm" novalidate>
+            <input type="hidden" id="productId" name="productId">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="productName">Product name</label>
+                <input type="text" id="productName" name="productName" required>
+                <span class="field-error" id="err-productName"></span>
+              </div>
+              <div class="field">
+                <label for="brandName">Brand</label>
+                <input type="text" id="brandName" name="brandName" required>
+                <span class="field-error" id="err-brandName"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" required>
+                <span class="field-error" id="err-category"></span>
+              </div>
+              <div class="field">
+                <label for="supplierName">Supplier name</label>
+                <input type="text" id="supplierName" name="supplierName" required>
+                <span class="field-error" id="err-supplierName"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="0" required>
+                <span class="field-error" id="err-quantity"></span>
+              </div>
+              <div class="field">
+                <label for="barcode">Barcode</label>
+                <input type="text" id="barcode" name="barcode" required>
+                <span class="field-error" id="err-barcode"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="purchasePrice">Purchase price</label>
+                <input type="number" id="purchasePrice" name="purchasePrice" min="0" step="0.01" required>
+                <span class="field-error" id="err-purchasePrice"></span>
+              </div>
+              <div class="field">
+                <label for="sellingPrice">Selling price</label>
+                <input type="number" id="sellingPrice" name="sellingPrice" min="0" step="0.01" required>
+                <span class="field-error" id="err-sellingPrice"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="manufacturingDate">Manufacturing date</label>
+                <input type="date" id="manufacturingDate" name="manufacturingDate" required>
+                <span class="field-error" id="err-manufacturingDate"></span>
+              </div>
+              <div class="field">
+                <label for="expiryDate">Expiry date</label>
+                <input type="date" id="expiryDate" name="expiryDate" required>
+                <span class="field-error" id="err-expiryDate"></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="storageLocation">Storage location</label>
+              <input type="text" id="storageLocation" name="storageLocation" required>
+              <span class="field-error" id="err-storageLocation"></span>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn btn-ghost" id="cancelEditBtn" hidden>Cancel edit</button>
+              <button type="submit" class="btn btn-primary" id="formSubmit">Save product</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <!-- Search -->
+      <section class="subtab-panel" data-panel="search" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Search for a product</h3>
+          <div class="search-row">
+            <div class="field">
+              <input type="text" id="searchInput" placeholder="Search by name, brand, category, or barcode">
+            </div>
+            <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+          </div>
+        </section>
+
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Supplier</th>
+                <th>Qty</th>
+                <th>Expiry</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="searchBody">
+              <tr><td colspan="7">Search above to find a product.</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Delete -->
+      <section class="subtab-panel" data-panel="delete" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Delete a product</h3>
+          <div class="search-row">
+            <div class="field">
+              <input type="text" id="deleteSearchInput" placeholder="Search by name, brand, category, or barcode">
+            </div>
+            <button class="btn btn-primary" id="deleteSearchBtn" type="button">Search</button>
+          </div>
+        </section>
+
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Qty</th>
+                <th>Location</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="deleteBody">
+              <tr><td colspan="5">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/inventory.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dash-body">
+
+<div class="dash-shell">
+
+  <div id="sidebarPlaceholder"></div>
+
+  <div class="dash-main">
+
+    <div id="topbarPlaceholder"></div>
+
+    <main class="dash-content">
+
+      <section class="welcome-section">
+        <h2 id="welcomeHeading">Welcome back</h2>
+        <p id="welcomeSub">Here's what's happening with your inventory today.</p>
+      </section>
+
+      <section class="summary-cards" id="summaryCards" aria-label="Summary">
+        <div class="summary-card">
+          <span class="summary-label">Total Products</span>
+          <span class="summary-value" id="statProducts">—</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Total Sales</span>
+          <span class="summary-value" id="statSales">—</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Total Purchases</span>
+          <span class="summary-value" id="statPurchases">—</span>
+        </div>
+        <div class="summary-card summary-card-warn">
+          <span class="summary-label">Low Stock</span>
+          <span class="summary-value" id="statLowStock">—</span>
+        </div>
+      </section>
+
+      <div class="dash-grid">
+        <section class="panel panel-chart">
+          <h3>Sales &amp; Purchase Overview</h3>
+          <div id="chartContainer" class="chart-container"></div>
+        </section>
+
+        <section class="panel panel-activity">
+          <h3>Recent Activity</h3>
+          <ul class="activity-list" id="activityList"></ul>
+        </section>
+      </div>
+
+      <section class="panel panel-table">
+        <h3>Low Stock Products</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Current Stock</th>
+              <th>Reorder Point</th>
+              <th>Supplier</th>
+            </tr>
+          </thead>
+          <tbody id="lowStockBody"></tbody>
+        </table>
+      </section>
+
+      <section class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="qa-grid">
+          <button class="qa-btn" data-action="add-product">
+            <span class="qa-plus">+</span> Add Product
+          </button>
+          <button class="qa-btn" data-action="add-supplier">
+            <span class="qa-plus">+</span> Add Supplier
+          </button>
+          <button class="qa-btn" data-action="record-sale">
+            <span class="qa-plus">+</span> Record Sale
+          </button>
+          <button class="qa-btn" data-action="record-purchase">
+            <span class="qa-plus">+</span> Record Purchase
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

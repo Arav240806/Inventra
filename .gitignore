@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Java / Maven
+inventra/target/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Node
+node_modules/
+dist/
+build/
+
+# Environment / secrets
+.env
+.env.*
+application-local.properties
+application-local.yml
+
+# Archives
+*.zip
+
+frontend/inventra/
+frontend/inventra/

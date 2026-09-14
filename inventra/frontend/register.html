@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+<header class="auth-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 28 28" width="28" height="28">
+        <rect x="3" y="10" width="10" height="15" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="15" y="4" width="10" height="21" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="3" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="15" y1="10" x2="25" y2="10" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </span>
+    Inventra
+  </a>
+</header>
+
+<main class="auth-main">
+  <div class="auth-card">
+    <h1>Create your account</h1>
+    <p class="auth-sub" id="authSub">Set up your organization on Inventra.</p>
+
+    <div class="form-banner" id="formBanner" hidden></div>
+
+    <div id="successPanel" hidden>
+      <p class="auth-sub">Save these — you'll need them every time you log in.</p>
+      <div class="id-reveal">
+        <div class="id-reveal-row">
+          <span class="id-reveal-label">Organization ID</span>
+          <span class="id-reveal-value" id="revealOrgId">—</span>
+        </div>
+        <div class="id-reveal-row">
+          <span class="id-reveal-label">Employee ID</span>
+          <span class="id-reveal-value" id="revealEmployeeId">—</span>
+        </div>
+        <div class="id-reveal-row">
+          <span class="id-reveal-label">Username</span>
+          <span class="id-reveal-value" id="revealUsername">—</span>
+        </div>
+      </div>
+      <p class="id-reveal-note">Everyone in your organization — Owner, Manager, or Employee — logs in with their own username/password plus this same Organization ID.</p>
+      <a href="login.html" class="btn btn-primary btn-block">Continue to login</a>
+    </div>
+
+    <form id="registerForm" novalidate>
+
+      <div class="field">
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="Owner">Owner — set up a new organization</option>
+          <option value="Manager">Manager — join an existing organization</option>
+          <option value="Employee">Employee — join an existing organization</option>
+        </select>
+        <span class="field-error" id="err-role"></span>
+      </div>
+
+      <!-- Owner-only: create a new organization -->
+      <div id="ownerFields" hidden>
+        <div class="form-row">
+          <div class="field">
+            <label for="organizationName">Organization name</label>
+            <input type="text" id="organizationName" name="organizationName">
+            <span class="field-error" id="err-organizationName"></span>
+          </div>
+          <div class="field">
+            <label for="organizationType">Organization type</label>
+            <select id="organizationType" name="organizationType">
+              <option value="" disabled selected>Select type</option>
+              <option value="Retail">Retail</option>
+              <option value="Wholesale">Wholesale</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Warehouse">Warehouse</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" id="err-organizationType"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="contactNumber">Contact number</label>
+          <input type="tel" id="contactNumber" name="contactNumber" inputmode="numeric" maxlength="10" placeholder="10 digit number">
+          <span class="field-error" id="err-contactNumber"></span>
+        </div>
+      </div>
+
+      <!-- Manager/Employee only: join an existing organization -->
+      <div id="joinFields" hidden>
+        <div class="field">
+          <label for="organizationId">Organization ID</label>
+          <input type="number" id="organizationId" name="organizationId" min="1" placeholder="Ask your Owner/Manager for this">
+          <span class="field-error" id="err-organizationId"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" required>
+          <span class="field-error" id="err-firstName"></span>
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" required>
+          <span class="field-error" id="err-lastName"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <span class="field-error" id="err-email"></span>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+          <span class="field-error" id="err-username"></span>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+          <span class="field-error" id="err-password"></span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn" disabled>Select a role to continue</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/register.js"></script>
+</body>
+</html>

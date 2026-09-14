@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dash-body">
+
+<div class="dash-shell">
+  <div id="sidebarPlaceholder"></div>
+
+  <div class="dash-main">
+    <div id="topbarPlaceholder"></div>
+
+    <main class="dash-content">
+
+      <div class="page-toolbar">
+        <p class="page-sub">Your account, your organization, and your password.</p>
+      </div>
+
+      <div class="form-banner" id="pageBanner" hidden></div>
+
+      <section class="panel">
+        <h3 class="subtab-panel-title">Account</h3>
+        <div class="id-reveal">
+          <div class="id-reveal-row">
+            <span class="id-reveal-label">Name</span>
+            <span class="id-reveal-value" id="infoName">—</span>
+          </div>
+          <div class="id-reveal-row">
+            <span class="id-reveal-label">Username</span>
+            <span class="id-reveal-value" id="infoUsername">—</span>
+          </div>
+          <div class="id-reveal-row">
+            <span class="id-reveal-label">Role</span>
+            <span class="id-reveal-value" id="infoRole">—</span>
+          </div>
+          <div class="id-reveal-row">
+            <span class="id-reveal-label">Employee ID</span>
+            <span class="id-reveal-value" id="infoEmployeeId">—</span>
+          </div>
+          <div class="id-reveal-row">
+            <span class="id-reveal-label">Organization ID</span>
+            <span class="id-reveal-value" id="infoOrgId">—</span>
+          </div>
+        </div>
+        <p class="id-reveal-note">Share your Organization ID with Managers/Employees so they can join from the Register page.</p>
+      </section>
+
+      <section class="panel">
+        <h3 class="subtab-panel-title">Organization snapshot</h3>
+        <div class="report-stats">
+          <div class="report-stat">
+            <span class="report-stat-value" id="statEmployees">—</span>
+            <span class="report-stat-label">Employees</span>
+          </div>
+          <div class="report-stat">
+            <span class="report-stat-value" id="statProducts">—</span>
+            <span class="report-stat-label">Products</span>
+          </div>
+          <div class="report-stat">
+            <span class="report-stat-value" id="statSuppliers">—</span>
+            <span class="report-stat-label">Suppliers</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3 class="subtab-panel-title">Change password</h3>
+        <div class="form-banner" id="passwordBanner" hidden></div>
+        <form id="passwordForm" novalidate>
+          <div class="field">
+            <label for="currentPassword">Current password</label>
+            <input type="password" id="currentPassword" name="currentPassword" required>
+            <span class="field-error" id="err-currentPassword"></span>
+          </div>
+          <div class="field">
+            <label for="newPassword">New password</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <span class="field-error" id="err-newPassword"></span>
+          </div>
+          <div class="field">
+            <label for="confirmPassword">Confirm new password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span class="field-error" id="err-confirmPassword"></span>
+          </div>
+          <button type="submit" class="btn btn-primary" id="passwordSubmit">Update password</button>
+        </form>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

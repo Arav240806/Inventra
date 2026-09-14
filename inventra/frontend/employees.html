@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dash-body">
+
+<div class="dash-shell">
+  <div id="sidebarPlaceholder"></div>
+
+  <div class="dash-main">
+    <div id="topbarPlaceholder"></div>
+
+    <main class="dash-content">
+
+      <div class="page-toolbar">
+        <p class="page-sub">Everyone with access to your organization.</p>
+      </div>
+
+      <div class="form-banner" id="pageBanner" hidden></div>
+
+      <nav class="subtabs" role="tablist">
+        <button class="subtab-btn active" id="tabBtnView" data-tab="view">View all</button>
+        <button class="subtab-btn" id="tabBtnAdd" data-tab="add">Add</button>
+        <button class="subtab-btn" id="tabBtnSearch" data-tab="search">Search</button>
+        <button class="subtab-btn" id="tabBtnDelete" data-tab="delete">Delete</button>
+      </nav>
+
+      <!-- View all -->
+      <section class="subtab-panel" data-panel="view">
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Org ID</th>
+                <th>Department</th>
+                <th>Joined</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="employeesBody">
+              <tr><td colspan="10">Loading employees...</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Add / Edit -->
+      <section class="subtab-panel" data-panel="add" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title" id="addPanelTitle">Add employee</h3>
+
+          <div class="form-banner" id="formBanner" hidden></div>
+
+          <form id="employeeForm" novalidate>
+            <input type="hidden" id="id" name="id">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <span class="field-error" id="err-firstName"></span>
+              </div>
+              <div class="field">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <span class="field-error" id="err-lastName"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <span class="field-error" id="err-email"></span>
+              </div>
+              <div class="field">
+                <label for="contactNumber">Contact number</label>
+                <input type="tel" id="contactNumber" name="contactNumber" maxlength="10" required>
+                <span class="field-error" id="err-contactNumber"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" name="userName" required>
+                <span class="field-error" id="err-userName"></span>
+              </div>
+              <div class="field">
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" required>
+                <span class="field-error" id="err-password"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                  <option value="" disabled selected>Select role</option>
+                  <option value="Owner">Owner</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Employee">Employee</option>
+                </select>
+                <span class="field-error" id="err-role"></span>
+              </div>
+              <div class="field">
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                  <option value="" disabled selected>Select status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+                <span class="field-error" id="err-status"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="organizationId">Organization ID</label>
+                <input type="number" id="organizationId" name="organizationId" min="1" readonly>
+                <span class="field-error" id="err-organizationId"></span>
+              </div>
+              <div class="field">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+                <span class="field-error" id="err-department"></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="joiningDate">Joining date</label>
+              <input type="date" id="joiningDate" name="joiningDate" required>
+              <span class="field-error" id="err-joiningDate"></span>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn btn-ghost" id="cancelEditBtn" hidden>Cancel edit</button>
+              <button type="submit" class="btn btn-primary" id="formSubmit">Save employee</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <!-- Search -->
+      <section class="subtab-panel" data-panel="search" hidden>
+        <section class="panel">
+          <h3 class="subtab-panel-title">Search for an employee</h3>
+          <div class="search-row">
+            <div class="field">
+              <input type="text" id="searchInput" placeholder="Search by name, username, or email">
+            </div>
+            <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+          </div>
+        </section>
+
+        <section class="panel panel-table">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="searchBody">
+              <tr><td colspan="7">Search above to find an employee.</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Delete (Owner / Manager only) -->
+      <section class="subtab-panel" data-panel="delete" hidden>
+        <div id="deleteAllowed">
+          <section class="panel">
+            <h3 class="subtab-panel-title">Delete an employee</h3>
+            <div class="search-row">
+              <div class="field">
+                <input type="text" id="deleteSearchInput" placeholder="Search by name, username, or email">
+              </div>
+              <button class="btn btn-primary" id="deleteSearchBtn" type="button">Search</button>
+            </div>
+          </section>
+
+          <section class="panel panel-table">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="deleteBody">
+                <tr><td colspan="5">Loading employees...</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <div id="deleteDenied" class="access-denied" hidden>
+          Only Owners and Managers can delete employee records.
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/employees.js"></script>
+</body>
+</html>

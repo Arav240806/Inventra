@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Inventra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+<header class="auth-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 28 28" width="28" height="28">
+        <rect x="3" y="10" width="10" height="15" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="15" y="4" width="10" height="21" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="3" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="15" y1="10" x2="25" y2="10" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </span>
+    Inventra
+  </a>
+</header>
+
+<main class="auth-main">
+  <div class="auth-card auth-card-narrow">
+    <h1>Log in</h1>
+    <p class="auth-sub">Access your Inventra organization.</p>
+
+    <div class="form-banner" id="formBanner" hidden></div>
+
+    <form id="loginForm" novalidate>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <span class="field-error" id="err-username"></span>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <span class="field-error" id="err-password"></span>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="employeeId">Employee ID</label>
+          <input type="number" id="employeeId" name="employeeId" min="1" required>
+          <span class="field-error" id="err-employeeId"></span>
+        </div>
+        <div class="field">
+          <label for="organizationId">Organization ID</label>
+          <input type="number" id="organizationId" name="organizationId" min="1" required>
+          <span class="field-error" id="err-organizationId"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="role">Role</label>
+        <select id="role" name="role" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="Owner">Owner</option>
+          <option value="Manager">Manager</option>
+          <option value="Employee">Employee</option>
+        </select>
+        <span class="field-error" id="err-role"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Log in</button>
+    </form>
+
+    <p class="auth-switch">Don't have an account? <a href="register.html">Register</a></p>
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
