@@ -1,6 +1,3 @@
-# macOS
-.DS_Store
-
 # Java / Maven
 inventra/target/
 *.class
@@ -21,8 +18,8 @@ build/
 application-local.properties
 application-local.yml
 
+# OS
+.DS_Store
+
 # Archives
 *.zip
-
-frontend/inventra/
-frontend/inventra/
