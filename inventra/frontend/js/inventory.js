@@ -47,7 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   tabButtons.forEach((btn) => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    btn.addEventListener('click', () => {
+      // Clicking the Add tab directly (not via an Edit link) should always
+      // start from a blank form, not whatever was left over from an edit.
+      if (btn.dataset.tab === 'add') resetForm();
+      switchTab(btn.dataset.tab);
+    });
   });
 
   // --- Banners / errors ----------------------------------------------------
